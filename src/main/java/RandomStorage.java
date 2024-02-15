@@ -6,27 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 
-public class RandomStorage implements StorageService{
-
-    private final Map<String, List<URI>> storage= new HashMap<>();
-
+public class RandomStorage extends AbstractStorage implements StorageService{
     private final SecureRandom random;
     public RandomStorage( SecureRandom random) {
         this.random = random;
     }
-
-    @Override
-    public void save(String serviceName, URI address) {
-        if (storage.containsKey(serviceName)){
-           storage.get(serviceName).add(address);
-       } else {
-           List<URI> uriList = new ArrayList<>();
-           uriList.add(address);
-           storage.put(serviceName,uriList);
-       }
-
-    }
-
     @Override
     public URI getByName(String serviceName) {
         List<URI> uriList = storage.get(serviceName);

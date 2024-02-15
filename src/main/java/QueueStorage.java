@@ -1,19 +1,8 @@
 import java.net.URI;
 import java.util.*;
 
-public class QueueStorage implements StorageService{
-    private final Map<String, List<URI>> storage= new HashMap<>();
+public class QueueStorage extends AbstractStorage  implements StorageService {
     private int i = 0;
-    @Override
-    public void save(String serviceName, URI address) {
-        if (storage.containsKey(serviceName)){
-            storage.get(serviceName).add(address);
-        } else {
-            List<URI> uriList = new ArrayList<>();
-            uriList.add(address);
-            storage.put(serviceName,uriList);
-        }
-    }
 
     @Override
     public URI getByName(String serviceName) {
@@ -25,3 +14,4 @@ public class QueueStorage implements StorageService{
         return uriList.get(i);
     }
 }
+//лимит по кол-во ссылок. 10. если 11, то самая стара заменится на новую. и тесты.
